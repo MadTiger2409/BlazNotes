@@ -1,0 +1,38 @@
+﻿@using BlazNotes.Models;
+
+@page "/all"
+@inject HttpClient Http
+
+<h1>All notes</h1>
+
+@if (notes == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var note in notes)
+        {
+            <tr>
+                <td>@note.Title</td>
+                <td>@note.Description</td>
+                <td>
+                    <button class="btn btn-primary">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@functions {
+    Note[] notes;
+
+    //protected override async Task OnInitAsync() { }
+}

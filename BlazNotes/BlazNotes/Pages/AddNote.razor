@@ -1,0 +1,44 @@
+﻿@page "/add"
+
+@using BlazNotes.Services.Interfaces;
+
+@inject INoteService _noteService
+
+<h1>Add note</h1>
+<div class="card">
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text"
+                       name="title"
+                       class="form-control"
+                       bind="@title"
+                       placeholder="Input title here" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description"
+                          class="form-control"
+                          bind="@description"
+                          placeholder="Input description here" />
+            </div>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="button"
+                    class="btn btn-success"
+                    onclick=@AddNoteAsync>
+                Add
+            </button>
+        </form>
+    </div>
+</div>
+
+@functions {
+    string title;
+    string description;
+
+    async Task AddNoteAsync()
+    {
+        await _noteService.CreateAsync(title, description);
+    }
+}

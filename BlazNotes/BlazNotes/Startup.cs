@@ -1,5 +1,6 @@
 using BlazNotes.Services;
 using BlazNotes.Services.Interfaces;
+using Blazor.Extensions.Storage;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +10,8 @@ namespace BlazNotes
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<INoteService, NoteService>();
+            services.AddTransient<INoteService, NoteService>();
+            services.AddStorage();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

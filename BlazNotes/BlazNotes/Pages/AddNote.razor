@@ -2,7 +2,7 @@
 
 @using BlazNotes.Services.Interfaces;
 
-@inject INoteService _noteService
+@inject INoteService noteService
 
 <h1>Add note</h1>
 <div class="card">
@@ -39,6 +39,6 @@
 
     async Task AddNoteAsync()
     {
-        await _noteService.CreateAsync(title, description);
+        await noteService.CreateAsync(title, description);
     }
 }

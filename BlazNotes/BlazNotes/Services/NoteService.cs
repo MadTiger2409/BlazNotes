@@ -1,5 +1,6 @@
 ﻿using BlazNotes.Models;
 using BlazNotes.Services.Interfaces;
+using Blazor.Extensions.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,27 +10,58 @@ namespace BlazNotes.Services
 {
     public class NoteService : INoteService
     {
-        public Task CreateAsync(string title, string description)
+        private readonly LocalStorage _localStorage;
+        private readonly string key = "notes";
+
+        public NoteService(LocalStorage localStorage)
         {
-            throw new NotImplementedException();
+            _localStorage = localStorage;
         }
 
-        public Task DeleteAsync(int id)
+        public async Task CreateAsync(string title, string description)
         {
-            throw new NotImplementedException();
+            int id = 1;
+            var notes = new List<Note>();
+            var notesArray = _localStorage.GetItem<List<Note>>(key).Result;
+
+            if (notes.Count > 0)
+                id += notes.Select(x => x.Id).Max();
+
+            notes.Add(new Note(id, title, description));
+
+            await _localStorage.SetItem<List<Note>>(key, notes);
         }
 
-        public Task<Note> ReadAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var notes = await ReadAsync();
+            notes.RemoveAll(x => x.Id == id);
+
+            await _localStorage.SetItem<List<Note>>(key, notes);
         }
 
-        public Task<List<Note>> ReadAsync()
+        public async Task<Note> ReadAsync(int id)
         {
-            throw new NotImplementedException();
+            var notes = await ReadAsync();
+            var note = notes.SingleOrDefault(x => x.Id == id);
+
+            if (note == null)
+                throw new Exception("There isn't a note with this id.");
+
+            return note;
         }
 
-        public Task UpdateAsync(int id)
+        public async Task<List<Note>> ReadAsync()
+        {
+            var notes = await _localStorage.GetItem<List<Note>>(key);
+
+            if (notes == null)
+                throw new Exception("There aren't any notes in memory.");
+
+            return notes;
+        }
+
+        public async Task UpdateAsync(int id)
         {
             throw new NotImplementedException();
         }

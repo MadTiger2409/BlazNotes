@@ -32,13 +32,24 @@
         </form>
     </div>
 </div>
+<p>@ex</p>
 
 @functions {
     string title;
     string description;
+    string ex;
 
     async Task AddNoteAsync()
     {
-        await noteService.CreateAsync(title, description);
+        try
+        {
+            await noteService.CreateAsync(title, description);
+        }
+        catch (Exception _ex)
+        {
+
+            ex = _ex.StackTrace;
+        }
+        
     }
 }

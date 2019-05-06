@@ -3,12 +3,13 @@
 @using BlazNotes.Models;
 
 @inject HttpClient Http
+@inject BlazNotes.Services.Interfaces.INoteService localStorage
 
 <h1>All notes</h1>
 
 @if (notes == null)
 {
-    <p><em>Loading...</em></p>
+    <u>Loading...</u>
 }
 else
 {
@@ -35,5 +36,8 @@ else
 @functions {
     Note[] notes;
 
-    //protected override async Task OnInitAsync() { }
+    protected override async Task OnInitAsync()
+    {
+        notes = await localStorage.ReadAsync();
+    }
 }

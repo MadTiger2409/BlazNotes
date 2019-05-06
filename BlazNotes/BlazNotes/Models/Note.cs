@@ -11,6 +11,8 @@ namespace BlazNotes.Models
         public string Title { get; protected set; }
         public string Description { get; protected set; }
 
+        public Note() { }
+
         public Note(int id, string title, string description)
         {
             Id = id;

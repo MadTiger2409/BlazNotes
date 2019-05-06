@@ -1,6 +1,6 @@
 using BlazNotes.Services;
 using BlazNotes.Services.Interfaces;
-using Blazor.Extensions.Storage;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +11,8 @@ namespace BlazNotes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<INoteService, NoteService>();
-            services.AddStorage();
+            services.AddTransient<ILocalStorageService, LocalStorageService>();
+            services.AddTransient<ISyncLocalStorageService, LocalStorageService>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

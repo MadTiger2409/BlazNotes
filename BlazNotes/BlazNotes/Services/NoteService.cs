@@ -1,6 +1,6 @@
 ﻿using BlazNotes.Models;
 using BlazNotes.Services.Interfaces;
-using Blazor.Extensions.Storage;
+using Blazored.LocalStorage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,34 +10,38 @@ namespace BlazNotes.Services
 {
     public class NoteService : INoteService
     {
-        private readonly LocalStorage _localStorage;
+        private ILocalStorageService _localStorage;
+        private ISyncLocalStorageService _syncLocalStorage;
         private readonly string key = "notes";
 
-        public NoteService(LocalStorage localStorage)
+        public NoteService(ILocalStorageService localStorage, ISyncLocalStorageService syncLocalStorage)
         {
             _localStorage = localStorage;
+            _syncLocalStorage = syncLocalStorage;
         }
 
         public async Task CreateAsync(string title, string description)
         {
             int id = 1;
-            var notes = new List<Note>();
-            var notesArray = _localStorage.GetItem<List<Note>>(key).Result;
+            var notes = await _localStorage.GetItemAsync<List<Note>>(key);
+
+            if (notes == null)
+                notes = new List<Note>();
 
             if (notes.Count > 0)
                 id += notes.Select(x => x.Id).Max();
 
             notes.Add(new Note(id, title, description));
 
-            await _localStorage.SetItem<List<Note>>(key, notes);
+            _syncLocalStorage.SetItem(key, notes);
         }
 
         public async Task DeleteAsync(int id)
         {
             var notes = await ReadAsync();
-            notes.RemoveAll(x => x.Id == id);
+            //notes.RemoveAll(x => x.Id == id);
 
-            await _localStorage.SetItem<List<Note>>(key, notes);
+            await _localStorage.SetItemAsync(key, notes);
         }
 
         public async Task<Note> ReadAsync(int id)
@@ -51,9 +55,9 @@ namespace BlazNotes.Services
             return note;
         }
 
-        public async Task<List<Note>> ReadAsync()
+        public async Task<Note[]> ReadAsync()
         {
-            var notes = await _localStorage.GetItem<List<Note>>(key);
+            var notes = _syncLocalStorage.GetItem<Note[]>(key);
 
             if (notes == null)
                 throw new Exception("There aren't any notes in memory.");

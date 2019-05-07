@@ -7,7 +7,7 @@
 
 <h1>All notes</h1>
 
-@if (notes == null)
+@if (notes == null || notes.Count == 0)
 {
     <u>There aren't any notes in memory.</u>
 }
@@ -26,7 +26,8 @@ else
                 <td>@note.Description</td>
                 <td>
                     <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger"
+                            onclick=@(() => DeleteAsync(note.Id))>Delete</button>
                 </td>
             </tr>
         }
@@ -35,10 +36,17 @@ else
 
 @functions
 {
-    List<Note> notes;
+    List<Note> notes = new List<Note>();
 
     protected override async Task OnInitAsync()
     {
         notes = await localStorage.ReadAsync();
+    }
+
+    async Task DeleteAsync(int id)
+    {
+        await localStorage.DeleteAsync(id);
+        notes = await localStorage.ReadAsync();
+        base.StateHasChanged();
     }
 }

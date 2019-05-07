@@ -11,13 +11,11 @@ namespace BlazNotes.Services
     public class NoteService : INoteService
     {
         private ILocalStorageService _localStorage;
-        private ISyncLocalStorageService _syncLocalStorage;
         private readonly string key = "notes";
 
-        public NoteService(ILocalStorageService localStorage, ISyncLocalStorageService syncLocalStorage)
+        public NoteService(ILocalStorageService localStorage)
         {
             _localStorage = localStorage;
-            _syncLocalStorage = syncLocalStorage;
         }
 
         public async Task CreateAsync(string title, string description)
@@ -33,13 +31,13 @@ namespace BlazNotes.Services
 
             notes.Add(new Note(id, title, description));
 
-            _syncLocalStorage.SetItem(key, notes);
+            await _localStorage.SetItemAsync(key, notes);
         }
 
         public async Task DeleteAsync(int id)
         {
             var notes = await ReadAsync();
-            //notes.RemoveAll(x => x.Id == id);
+            notes.RemoveAll(x => x.Id == id);
 
             await _localStorage.SetItemAsync(key, notes);
         }
@@ -55,9 +53,9 @@ namespace BlazNotes.Services
             return note;
         }
 
-        public async Task<Note[]> ReadAsync()
+        public async Task<List<Note>> ReadAsync()
         {
-            var notes = _syncLocalStorage.GetItem<Note[]>(key);
+            var notes = await _localStorage.GetItemAsync<List<Note>>(key);
 
             if (notes == null)
                 throw new Exception("There aren't any notes in memory.");

@@ -12,7 +12,6 @@ namespace BlazNotes
         {
             services.AddTransient<INoteService, NoteService>();
             services.AddTransient<ILocalStorageService, LocalStorageService>();
-            services.AddTransient<ISyncLocalStorageService, LocalStorageService>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

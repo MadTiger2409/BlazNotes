@@ -16,6 +16,15 @@ app {
     align-items: center;
 }
 
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+option:not(:checked) {
+    color: black;
+}
+
 .main {
     flex: 1;
 }

@@ -65,7 +65,12 @@ namespace BlazNotes.Services
 
         public async Task UpdateAsync(int id, string title, string description)
         {
-            throw new NotImplementedException();
+            var notes = await ReadAsync();
+
+            var note = notes.FirstOrDefault(x => x.Id == id);
+            note.Update(title, description);
+
+            await _localStorage.SetItemAsync(key, notes);
         }
     }
 }

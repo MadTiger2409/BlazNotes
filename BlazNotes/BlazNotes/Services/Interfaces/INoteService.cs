@@ -11,7 +11,7 @@ namespace BlazNotes.Services.Interfaces
         Task CreateAsync(string title, string description);
         Task<Note> ReadAsync(int id);
         Task<List<Note>> ReadAsync();
-        Task UpdateAsync(int id);
+        Task UpdateAsync(int id, string title, string description);
         Task DeleteAsync(int id);
     }
 }

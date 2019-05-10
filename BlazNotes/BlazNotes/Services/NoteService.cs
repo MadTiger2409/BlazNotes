@@ -63,7 +63,7 @@ namespace BlazNotes.Services
             return notes;
         }
 
-        public async Task UpdateAsync(int id)
+        public async Task UpdateAsync(int id, string title, string description)
         {
             throw new NotImplementedException();
         }

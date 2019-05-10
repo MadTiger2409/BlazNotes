@@ -3,6 +3,7 @@
 @using BlazNotes.Models;
 
 @inject HttpClient Http
+@inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
 @inject BlazNotes.Services.Interfaces.INoteService localStorage
 
 <h1>All notes</h1>
@@ -25,9 +26,14 @@ else
                 <td>@note.Title</td>
                 <td>@note.Description</td>
                 <td>
-                    <button class="btn btn-primary">Edit</button>
+                    <button class="btn btn-primary"
+                            onclick=@(() => UriHelper.NavigateTo($"edit/{note.Id}"))>
+                        Edit
+                    </button>
                     <button class="btn btn-danger"
-                            onclick=@(() => DeleteAsync(note.Id))>Delete</button>
+                            onclick=@(() => DeleteAsync(note.Id))>
+                        Delete
+                    </button>
                 </td>
             </tr>
         }

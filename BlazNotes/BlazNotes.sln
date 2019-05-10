@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28822.285
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazNotes", "BlazNotes\BlazNotes.csproj", "{3A84F455-F03A-4AE0-849B-98E4ECBB1594}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazNotes", "BlazNotes\BlazNotes.csproj", "{3A84F455-F03A-4AE0-849B-98E4ECBB1594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

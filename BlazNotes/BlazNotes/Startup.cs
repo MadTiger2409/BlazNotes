@@ -1,4 +1,3 @@
-using BlazNotes.Extensions;
 using BlazNotes.Services;
 using BlazNotes.Services.Interfaces;
 using Blazored.LocalStorage;
@@ -17,10 +16,10 @@ namespace BlazNotes
             services.AddTransient<INoteService, NoteService>();
             services.AddTransient<ILocalStorageService, LocalStorageService>();
 
-            services.AddBlazoredToastService(options =>
+            services.AddBlazoredToast(options =>
             {
                 options.Timeout = 10;
-                options.Position = ToastPosition.TopRight;
+                options.Position = ToastPosition.BottomRight;
             });
         }
 

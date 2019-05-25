@@ -1,7 +1,5 @@
 ﻿@page "/add"
-
-@using BlazNotes.Services.Interfaces;
-
+@inject IToastService toastService
 @inject INoteService noteService
 
 <h1>Add note</h1>
@@ -14,7 +12,6 @@
                        name="title"
                        class="form-control"
                        bind="@title"
-                       onfocusin=@ClearMessageAsync
                        placeholder="Input title here" />
             </div>
             <div class="form-group">
@@ -22,8 +19,7 @@
                 <textarea name="description"
                           class="form-control"
                           bind="@description"
-                          onfocusin=@ClearMessageAsync
-                          placeholder="Input description here"/>
+                          placeholder="Input description here" />
             </div>
             <button type="reset" class="btn btn-secondary">Reset</button>
             <button type="button"
@@ -32,7 +28,6 @@
                 Add
             </button>
         </form>
-        <p class="text-danger">@message</p>
     </div>
 </div>
 
@@ -40,29 +35,22 @@
 {
     string title;
     string description;
-    string message;
 
     async Task AddNoteAsync()
     {
         try
         {
             await noteService.CreateAsync(title, description);
-            message = "";
+            toastService.ShowSuccess("Note added!", "Success");
         }
         catch (Exception)
         {
-
-            message = "Something went wrong. Try again!";
+            toastService.ShowError("Something went wrong!", "Failed");
         }
         finally
         {
             title = "";
             description = "";
         }
-    }
-
-    async Task ClearMessageAsync()
-    {
-        await Task.FromResult(message = "");
     }
 }

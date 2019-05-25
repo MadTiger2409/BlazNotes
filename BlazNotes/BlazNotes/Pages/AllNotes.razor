@@ -1,10 +1,10 @@
 ﻿@page "/all"
 
-@using BlazNotes.Models;
+
 
 @inject HttpClient Http
 @inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
-@inject BlazNotes.Services.Interfaces.INoteService localStorage
+@inject INoteService noteService
 
 <h1>All notes</h1>
 
@@ -46,13 +46,13 @@ else
 
     protected override async Task OnInitAsync()
     {
-        notes = await localStorage.ReadAsync();
+        notes = await noteService.ReadAsync();
     }
 
     async Task DeleteAsync(int id)
     {
-        await localStorage.DeleteAsync(id);
-        notes = await localStorage.ReadAsync();
+        await noteService.DeleteAsync(id);
+        notes = await noteService.ReadAsync();
         base.StateHasChanged();
     }
 }

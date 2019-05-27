@@ -89,6 +89,10 @@ option:not(:checked) {
     padding-top: 1.1rem;
 }
 
+.card {
+    z-index: -1;
+}
+
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);
 }

@@ -25,6 +25,10 @@ option:not(:checked) {
     color: black;
 }
 
+#topBar {
+    z-index: 1;
+}
+
 .main {
     flex: 1;
 }
@@ -87,10 +91,6 @@ option:not(:checked) {
 
 .content {
     padding-top: 1.1rem;
-}
-
-.card {
-    z-index: -1;
 }
 
 .navbar-toggler {

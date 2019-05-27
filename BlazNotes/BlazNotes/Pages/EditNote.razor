@@ -1,5 +1,5 @@
 ﻿@page "/edit/{Id:int}"
-
+@inject IToastService toastService
 @inject INoteService noteService
 
 <h1>Edit note</h1>
@@ -12,7 +12,6 @@
                        name="title"
                        class="form-control"
                        bind="@title"
-                       onfocusin=@ClearMessageAsync
                        placeholder="Input title here" />
             </div>
             <div class="form-group">
@@ -20,17 +19,19 @@
                 <textarea name="description"
                           class="form-control"
                           bind="@description"
-                          onfocusin=@ClearMessageAsync
-                          placeholder="Input description here"/>
+                          placeholder="Input description here" />
             </div>
             <button type="button"
                     class="btn btn-secondary"
-                    onclick=@RestoreContentAsync>Restore</button>
+                    onclick=@RestoreContentAsync>
+                Restore
+            </button>
             <button type="button"
                     class="btn btn-success"
-                    onclick=@UpdateNoteAsync>Update</button>
+                    onclick=@UpdateNoteAsync>
+                Update
+            </button>
         </form>
-        <p class="text-danger">@message</p>
     </div>
 </div>
 
@@ -41,7 +42,6 @@
 
     string title;
     string description;
-    string message;
     Note note;
 
     protected override async Task OnInitAsync()
@@ -56,18 +56,13 @@
         try
         {
             await noteService.UpdateAsync(Id, title, description);
-            message = "";
+            toastService.ShowSuccess("Note updated!", "Success");
         }
         catch (Exception)
         {
 
-            message = "Something went wrong. Try again!";
+            toastService.ShowError("Something went wrong!", "Failed");
         }
-    }
-
-    async Task ClearMessageAsync()
-    {
-        await Task.FromResult(message = "");
     }
 
     async Task RestoreContentAsync()

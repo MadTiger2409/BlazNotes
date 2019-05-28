@@ -25,6 +25,10 @@ option:not(:checked) {
     color: black;
 }
 
+#topBar {
+    z-index: 1;
+}
+
 .main {
     flex: 1;
 }

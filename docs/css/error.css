@@ -1,3 +1,13 @@
-#errorCard {
-	max-height: 50%;
+@media (max-width: 767.98px) {
+    #errorCard {
+        max-height:50%;
+        max-width: 70%;
+    }
+}
+
+@media (min-width: 768px) {
+    #errorCard {
+        max-height: 50%;
+        max-width: 35%;
+    }
 }

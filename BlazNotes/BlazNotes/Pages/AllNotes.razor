@@ -1,6 +1,6 @@
 ﻿@page "/all"
 
-
+<link href="css/allNotes.css" rel="stylesheet" />
 
 @inject HttpClient Http
 @inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
@@ -14,45 +14,38 @@
 }
 else
 {
-    <table class="table">
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-        @foreach (var note in notes)
-        {
-            <tr>
-                <td>@note.Title</td>
-                <td>@note.Description</td>
-                <td>
-                    <button class="btn btn-primary"
-                            onclick=@(() => UriHelper.NavigateTo($"edit/{note.Id}"))>
-                        Edit
-                    </button>
-                    <button class="btn btn-danger"
-                            onclick=@(() => DeleteAsync(note.Id))>
-                        Delete
-                    </button>
-                </td>
-            </tr>
-        }
-    </table>
+    @foreach (var note in notes)
+    {
+        <div class="card">
+            <h5 class="card-header">@note.Title</h5>
+            <div class="card-body">
+                <p class="card-text">@note.Description</p>
+                <button class="btn btn-primary"
+                        onclick=@(() => UriHelper.NavigateTo($"edit/{note.Id}"))>
+                    Edit
+                </button>
+                <button class="btn btn-danger"
+                        onclick=@(() => DeleteAsync(note.Id))>
+                    Delete
+                </button>
+            </div>
+        </div>
+    }
 }
 
-@functions
+    @functions
 {
-    List<Note> notes = new List<Note>();
+        List<Note> notes = new List<Note>();
 
-    protected override async Task OnInitAsync()
-    {
-        notes = await noteService.ReadAsync();
-    }
+        protected override async Task OnInitAsync()
+        {
+            notes = await noteService.ReadAsync();
+        }
 
-    async Task DeleteAsync(int id)
-    {
-        await noteService.DeleteAsync(id);
-        notes = await noteService.ReadAsync();
-        base.StateHasChanged();
+        async Task DeleteAsync(int id)
+        {
+            await noteService.DeleteAsync(id);
+            notes = await noteService.ReadAsync();
+            base.StateHasChanged();
+        }
     }
-}

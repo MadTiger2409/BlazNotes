@@ -10,14 +10,12 @@
 
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" bind="@command.Title" name="title"
-                        class="form-control" placeholder="Input title here" />
+                <input type="text"  class="form-control" placeholder="Input title here" bind="@command.Title" name="title"/>
                 <ValidationMessage For="@(() => command.Title)" />
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea name="description" bind="@command.Description"
-                            class="form-control" placeholder="Input description here"></textarea>
+                <textarea name="description" class="form-control" placeholder="Input description here" bind="@command.Description"></textarea>
                 <ValidationMessage For="@(() => command.Description)" />
             </div>
             <button type="reset" class="btn btn-secondary">Reset</button>

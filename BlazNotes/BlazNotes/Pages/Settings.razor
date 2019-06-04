@@ -1,0 +1,31 @@
+﻿@page "/settings"
+
+<h1>Settings</h1>
+<div class="card text-@cssClass bg-@cssClass">
+    <div class="card-body">
+        <p>Test text</p>
+        <button class="btn btn-primary" onclick="@ChangeClass">Change</button>
+    </div>
+</div>
+
+@functions
+{
+    private string cssClass = "light";
+    private bool isLight = true;
+
+    void ChangeClass()
+    {
+        isLight = !isLight;
+
+        if (isLight == true)
+        {
+            cssClass = "light";
+        }
+        else
+        {
+            cssClass = "dark";
+        }
+
+        base.StateHasChanged();
+    }
+}

@@ -18,7 +18,7 @@
                 <textarea name="description" rows="5" class="form-control" placeholder="Input description here" bind="@command.Description"></textarea>
                 <ValidationMessage For="@(() => command.Description)" />
             </div>
-            <button type="reset" class="btn btn-secondary">Reset</button>
+            <button type="button" class="btn btn-secondary" onclick="@ResetFormAsync">Reset</button>
             <button type="submit" class="btn btn-success">Add</button>
         </EditForm>
     </div>
@@ -44,5 +44,10 @@
             // title = "";
             // description = "";
         }
+    }
+
+    async Task ResetFormAsync()
+    {
+        await Task.FromResult(command = new CreateNoteCommand());
     }
 }

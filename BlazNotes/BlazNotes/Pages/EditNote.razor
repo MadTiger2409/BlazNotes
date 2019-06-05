@@ -62,7 +62,8 @@
 
     async Task RestoreContentAsync()
     {
-        await Task.FromResult(command.Title = title);
-        await Task.FromResult(command.Description = description);
+        await Task.FromResult(command = new UpdateNoteCommand());
+        command.Title = title;
+        command.Description = description;
     }
 }

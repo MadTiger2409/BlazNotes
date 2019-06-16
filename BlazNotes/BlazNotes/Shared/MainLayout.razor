@@ -1,5 +1,7 @@
 @inherits LayoutComponentBase
 
+@inject IThemeService themeService
+
 <Blazored.Toast.BlazoredToasts />
 
 <div class="sidebar">
@@ -15,3 +17,12 @@
         @Body
     </div>
 </div>
+
+
+@functions
+{ 
+    protected override async Task OnInitAsync()
+    {
+        
+    }
+}

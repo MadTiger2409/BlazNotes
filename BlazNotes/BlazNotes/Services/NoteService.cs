@@ -11,11 +11,12 @@ namespace BlazNotes.Services
     public class NoteService : INoteService
     {
         private ILocalStorageService _localStorage;
-        private readonly string key = "notes";
+        private readonly string key;
 
         public NoteService(ILocalStorageService localStorage)
         {
             _localStorage = localStorage;
+            key = "notes";
         }
 
         public async Task CreateAsync(string title, string description)

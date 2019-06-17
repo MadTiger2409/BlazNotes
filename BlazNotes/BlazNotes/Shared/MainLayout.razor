@@ -13,16 +13,15 @@
         
     </div>
 
-    <div class="content px-4">
-        @Body
-    </div>
+    <CascadingValue Value="@Theme" Name="Theme">
+        <div class="content px-4">
+            @Body
+        </div>
+    </CascadingValue>
 </div>
 
 
 @functions
 { 
-    protected override async Task OnInitAsync()
-    {
-        
-    }
+    string Theme { get; set; } = "Dark";
 }

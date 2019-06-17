@@ -7,9 +7,12 @@
         <button class="btn btn-primary" onclick="@ChangeClass">Change</button>
     </div>
 </div>
+<p>@Theme</p>
 
 @functions
 {
+    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
+
     private string cssClass = "light";
     private bool isLight = true;
 

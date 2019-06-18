@@ -39,13 +39,15 @@
             }
 
             _theme = value;
+            themeService.UpdateAsync(_theme);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Theme)));
+            
             base.StateHasChanged();
         }
     }
 
-    protected override void OnInit()
+    protected override async Task OnInitAsync()
     {
-        Theme = "Dark";
+        Theme = await themeService.ReadAsync();
     }
 }

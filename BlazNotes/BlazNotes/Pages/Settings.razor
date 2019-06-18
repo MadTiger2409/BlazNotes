@@ -1,7 +1,7 @@
 ﻿@page "/settings"
 
 <h1>Settings</h1>
-<div class="card text-@cssClass bg-@cssClass">
+<div class="card card-@Theme">
     <div class="card-body">
         <p style= "color: blue;"><b>A little preview of the future...</b></p>
         <button class="btn btn-primary" onclick="@ChangeClass">Change</button>
@@ -13,8 +13,19 @@
 {
     [CascadingParameter(Name = "Theme")] string Theme { get; set; }
 
-    private string cssClass = "light";
-    private bool isLight = true;
+    private bool isLight;
+
+    protected override void OnInit()
+    {
+        if (Theme == "light")
+        {
+            isLight = true;
+        }
+        else
+        {
+            isLight = false;
+        }
+    }
 
     void ChangeClass()
     {
@@ -22,13 +33,11 @@
 
         if (isLight == true)
         {
-            cssClass = "light";
-            Theme = "Light";
+            Theme = "light";
         }
         else
         {
-            cssClass = "dark";
-            Theme = "Dark";
+            Theme = "dark";
         }
 
         base.StateHasChanged();

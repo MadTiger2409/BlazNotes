@@ -1,4 +1,5 @@
 @inherits LayoutComponentBase
+@implements INotifyPropertyChanged
 
 @inject IThemeService themeService
 
@@ -23,5 +24,28 @@
 
 @functions
 { 
-    string Theme { get; set; } = "Dark";
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public string _theme;
+
+    public string Theme
+    {
+        get { return _theme; }
+        set
+        {
+            if (value == _theme)
+            {
+                return;
+            }
+
+            _theme = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Theme)));
+            base.StateHasChanged();
+        }
+    }
+
+    protected override void OnInit()
+    {
+        Theme = "Dark";
+    }
 }

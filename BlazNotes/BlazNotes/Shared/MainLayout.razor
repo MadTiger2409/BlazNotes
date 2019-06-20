@@ -1,7 +1,5 @@
 @inherits LayoutComponentBase
-@implements INotifyPropertyChanged
-
-@inject IThemeService themeService
+@inject  AppState appState
 
 <Blazored.Toast.BlazoredToasts />
 
@@ -14,40 +12,16 @@
         
     </div>
 
-    <CascadingValue Value="@Theme" Name="Theme">
-        <div class="content px-4">
-            @Body
-        </div>
-    </CascadingValue>
+    <div class="content px-4">
+        @Body
+    </div>
 </div>
 
 
 @functions
 { 
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    public string _theme;
-
-    public string Theme
+    protected override void OnInit()
     {
-        get { return _theme; }
-        set
-        {
-            if (value == _theme)
-            {
-                return;
-            }
-
-            _theme = value;
-            themeService.UpdateAsync(_theme);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Theme)));
-            
-            base.StateHasChanged();
-        }
-    }
-
-    protected override async Task OnInitAsync()
-    {
-        Theme = await themeService.ReadAsync();
+        appState.OnChange += StateHasChanged;
     }
 }

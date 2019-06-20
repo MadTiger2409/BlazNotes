@@ -1,3 +1,4 @@
+using BlazNotes.Helpers;
 using BlazNotes.Services;
 using BlazNotes.Services.Interfaces;
 using Blazored.LocalStorage;
@@ -15,6 +16,7 @@ namespace BlazNotes
             services.AddTransient<INoteService, NoteService>();
             services.AddTransient<IThemeService, ThemeService>();
             services.AddTransient<ILocalStorageService, LocalStorageService>();
+            services.AddSingleton<AppState>();
 
             services.AddBlazoredToast(options =>
             {

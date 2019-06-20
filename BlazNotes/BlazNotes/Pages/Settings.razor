@@ -1,45 +1,40 @@
 ﻿@page "/settings"
 
+@inject AppState appState
+
 <h1>Settings</h1>
-<div class="card card-@Theme">
+<div class="card card-@theme">
     <div class="card-body">
         <p style= "color: blue;"><b>A little preview of the future...</b></p>
         <button class="btn btn-primary" onclick="@ChangeClass">Change</button>
     </div>
 </div>
-<p>@Theme</p>
+<p>@theme</p>
 
 @functions
 {
-    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
+    bool isLight;
+    string theme;
 
-    private bool isLight;
-
-    protected override void OnInit()
+    protected override async Task OnInitAsync()
     {
-        if (Theme == "light")
-        {
-            isLight = true;
-        }
-        else
-        {
-            isLight = false;
-        }
+        theme = await appState.GetThemeAsync();
+        isLight = theme.Equals("light");
     }
 
-    void ChangeClass()
+    async Task ChangeClass()
     {
         isLight = !isLight;
 
         if (isLight == true)
         {
-            Theme = "light";
+            theme = "light";
         }
         else
         {
-            Theme = "dark";
+            theme = "dark";
         }
 
-        base.StateHasChanged();
+        await appState.SetThemeAsync(theme);
     }
 }

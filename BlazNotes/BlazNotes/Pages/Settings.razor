@@ -3,23 +3,23 @@
 @inject AppState appState
 
 <h1>Settings</h1>
-<div class="card card-@theme">
+<div class="card card-@Theme">
     <div class="card-body">
         <p style= "color: blue;"><b>A little preview of the future...</b></p>
         <button class="btn btn-primary" onclick="@ChangeClass">Change</button>
     </div>
 </div>
-<p>@theme</p>
+<p>@Theme</p>
 
 @functions
 {
-    bool isLight;
-    string theme;
+    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
 
-    protected override async Task OnInitAsync()
+    bool isLight;
+
+    protected override void OnInit()
     {
-        theme = await appState.GetThemeAsync();
-        isLight = theme.Equals("light");
+        isLight = Theme.Equals("light");
     }
 
     async Task ChangeClass()
@@ -28,13 +28,11 @@
 
         if (isLight == true)
         {
-            theme = "light";
+            await appState.SetThemeAsync("light");
         }
         else
         {
-            theme = "dark";
+            await appState.SetThemeAsync("dark");
         }
-
-        await appState.SetThemeAsync(theme);
     }
 }

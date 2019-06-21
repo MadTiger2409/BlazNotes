@@ -8,7 +8,7 @@ namespace BlazNotes.Helpers
     {
         private IThemeService _themeService;
 
-        public Action OnChange;
+        public Func<Task> OnChange;
 
         public AppState(IThemeService themeService)
         {

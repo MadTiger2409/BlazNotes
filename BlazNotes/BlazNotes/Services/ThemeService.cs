@@ -16,7 +16,7 @@ namespace BlazNotes.Services
             key = "theme";
         }
 
-        public async Task CreateAsync(string theme = "light")
+        public async Task CreateAsync(string theme = "dark")
             => await _localStorage.SetItemAsync(key, theme);
 
         public async Task<string> ReadAsync()

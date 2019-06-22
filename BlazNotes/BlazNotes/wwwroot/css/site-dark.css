@@ -1,8 +1,9 @@
 ﻿/*
-* === CARD ===
+* === CONTAINER ===
 */
-.card-dark {
-    background-color: darkgray;
+
+.scrollContainer-dark {
+    background-color: #393939;
 }
 
 /*
@@ -16,16 +17,23 @@
         background-color: rgba(0,0,0,0.45);
     }
 
-    .nav-item a {
-    color: #cccccc;
-}
+    .nav-item-dark a {
+        color: #cccccc;
+    }
 
-    .nav-item a.active {
+    .nav-item-dark a.active {
         background-color: rgba(160, 160, 160, 0.15);
         color: #cccccc;
     }
 
-    .nav-item a:hover {
+    .nav-item-dark a:hover {
         background-color: rgba(160, 160, 160, 0.1);
         color: #cccccc;
     }
+
+/*
+* === CARD ===
+*/
+.card-dark {
+    background-color: #4d5052;
+}

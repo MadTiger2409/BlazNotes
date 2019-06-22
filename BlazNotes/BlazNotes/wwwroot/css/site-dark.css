@@ -3,6 +3,7 @@
 */
 
 .scrollContainer-dark {
+    color: #afc4d0;
     background-color: #393939;
 }
 
@@ -36,4 +37,29 @@
 */
 .card-dark {
     background-color: #4d5052;
+    border: 1px solid rgba(144, 144, 144, 0.31)
 }
+
+/*
+* === BUTTONS ===
+*/
+
+.btn-primary-dark {
+    background-color: #004186;
+    border-color: #004186;
+}
+    .btn-primary-dark:active {
+        background-color: #003c7c;
+        border-color: #003c7c;
+    }
+
+    .btn-primary-dark:focus {
+        background-color: #003c7c;
+        border-color: #003c7c;
+        box-shadow: 0 0 0 .2rem rgba(11, 66, 126, .5);
+    }
+
+    .btn-primary-dark:hover {
+        background-color: #0f345c;
+        border-color: #0f345c;
+    }

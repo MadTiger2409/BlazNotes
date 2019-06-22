@@ -5,11 +5,10 @@
 <h1>Settings</h1>
 <div class="card card-@Theme">
     <div class="card-body">
-        <p style= "color: blue;"><b>A little preview of the future...</b></p>
-        <button class="btn btn-primary" onclick="@ChangeClass">Change</button>
+        <b>Theme: </b>
+        <button class="btn btn-primary btn-primary-@Theme" onclick="@ChangeClass">@Theme.UppercaseFirst()</button>
     </div>
 </div>
-<p>@Theme</p>
 
 @functions
 {

@@ -3,7 +3,7 @@
 @inject INoteService noteService
 
 <h1>Add note</h1>
-<div class="card">
+<div class="card card-@Theme">
     <div class="card-body">
         <EditForm Model="@command" OnValidSubmit="@AddNoteAsync">
             <DataAnnotationsValidator />
@@ -26,6 +26,8 @@
 
 @functions
 {
+    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
+
     private CreateNoteCommand command = new CreateNoteCommand();
 
     async Task AddNoteAsync()

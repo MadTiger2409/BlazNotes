@@ -3,7 +3,7 @@
 @inject INoteService noteService
 
 <h1>Edit note</h1>
-<div class="card">
+<div class="card card-@Theme">
     <div class="card-body">
         <EditForm Model="@command" OnValidSubmit="@UpdateNoteAsync">
             <DataAnnotationsValidator />
@@ -11,21 +11,23 @@
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" placeholder="Input title here" bind="@command.Title" name="title" />
-                <ValidationMessage For="@(() => command.Title)" />
+                <CustomValidationMessage For="@(() => command.Title)" Class="@("validation-message validation-message-" + Theme)" />
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea name="description" rows="5" class="form-control" placeholder="Input description here" bind="@command.Description"></textarea>
-                <ValidationMessage For="@(() => command.Description)" />
+                <CustomValidationMessage For="@(() => command.Description)" Class="@("validation-message validation-message-" + Theme)" />
             </div>
-            <button type="button" class="btn btn-secondary" onclick=@RestoreContentAsync>Restore</button>
-            <button type="submit" class="btn btn-success">Update</button>
+            <button type="button" class="btn btn-secondary btn-secondary-@Theme" onclick=@RestoreContentAsync>Restore</button>
+            <button type="submit" class="btn btn-success btn-success-@Theme">Update</button>
         </EditForm>
     </div>
 </div>
 
 @functions
 {
+    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
+
     [Parameter]
     public int Id { get; set; }
 

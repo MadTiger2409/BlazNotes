@@ -11,14 +11,12 @@
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" placeholder="Input title here" bind="@command.Title" name="title"/>
-                <div class="validation-message-@Theme">
-                    <ValidationMessage For="@(() => command.Title)" />
-                </div>
+                <CustomValidationMessage For="@(() => command.Title)" Class="@("validation-message validation-message-" + Theme)" />
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea name="description" rows="5" class="form-control" placeholder="Input description here" bind="@command.Description"></textarea>
-                <ValidationMessage For="@(() => command.Description)" />
+                <CustomValidationMessage For="@(() => command.Description)" Class="@("validation-message validation-message-" + Theme)" />
             </div>
             <button type="button" class="btn btn-secondary btn-secondary-@Theme" onclick="@ResetFormAsync">Reset</button>
             <button type="submit" class="btn btn-success btn-success-@Theme">Add</button>
@@ -30,7 +28,7 @@
 {
     [CascadingParameter(Name = "Theme")] string Theme { get; set; }
 
-    private CreateNoteCommand command = new CreateNoteCommand();
+    CreateNoteCommand command = new CreateNoteCommand();
 
     async Task AddNoteAsync()
     {

@@ -10,6 +10,7 @@
 </div>
 
 @functions {
-    // Demonstrates how a parent component can supply parameters
+    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
+
     [Parameter] string Title { get; set; }
 }

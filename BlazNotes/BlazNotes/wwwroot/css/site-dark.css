@@ -7,6 +7,15 @@
     background-color: #393939;
 }
 
+.main .top-row-dark {
+    background-color: #303030;
+    border-bottom: 1px solid #303030;
+}
+
+.validation-message-dark {
+    color: #ffb400;
+}
+
 /*
 * === SIDEBAR ===
 */
@@ -44,6 +53,9 @@
 * === BUTTONS ===
 */
 
+/*
+* --- Primary Button ---
+*/
 .btn-primary-dark {
     background-color: #004186;
     border-color: #004186;
@@ -62,4 +74,76 @@
     .btn-primary-dark:hover {
         background-color: #0f345c;
         border-color: #0f345c;
+    }
+
+/*
+* --- Danger Button ---
+*/
+.btn-danger-dark {
+    background-color: #860000;
+    border-color: #860000;
+}
+
+    .btn-danger-dark:active {
+        background-color: #7c0000;
+        border-color: #7c0000;
+    }
+
+    .btn-danger-dark:focus {
+        background-color: #7c0000;
+        border-color: #7c0000;
+        box-shadow: 0 0 0 .2rem rgba(126, 11, 11, 0.50);
+    }
+
+    .btn-danger-dark:hover {
+        background-color: #5c0f0f;
+        border-color: #5c0f0f;
+    }
+
+/*
+* --- Secondary Button ---
+*/
+.btn-secondary-dark {
+    background-color: #423d3d;
+    border-color: #423d3d;
+}
+
+    .btn-secondary-dark:active {
+        background-color: #3b3737;
+        border-color: #3b3737;
+    }
+
+    .btn-secondary-dark:focus {
+        background-color: #3b3737;
+        border-color: #3b3737;
+        box-shadow: 0 0 0 .2rem rgba(40, 40, 40, 0.50);
+    }
+
+    .btn-secondary-dark:hover {
+        background-color: #2c2828;
+        border-color: #2c2828;
+    }
+
+/*
+* --- Success Button ---
+*/
+.btn-success-dark {
+    background-color: #018600;
+    border-color: #018600;
+}
+
+    .btn-success-dark:active {
+        background-color: #3a7c00;
+        border-color: #3a7c00;
+    }
+
+    .btn-success-dark:focus {
+        background-color: #3a7c00;
+        border-color: #3a7c00;
+        box-shadow: 0 0 0 .2rem rgba(37, 126, 11, 0.50);
+    }
+
+    .btn-success-dark:hover {
+        background-color: #2e5c0f;
+        border-color: #2e5c0f;
     }

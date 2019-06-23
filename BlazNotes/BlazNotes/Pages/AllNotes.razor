@@ -16,15 +16,15 @@ else
 {
     @foreach (var note in notes)
     {
-        <div class="card">
+        <div class="card card-@Theme">
             <h5 class="card-header">@note.Title</h5>
             <div class="card-body">
                 <p class="card-text">@note.Description</p>
-                <button class="btn btn-primary"
+                <button class="btn btn-primary btn-primary-@Theme"
                         onclick=@(() => UriHelper.NavigateTo($"edit/{note.Id}"))>
                     Edit
                 </button>
-                <button class="btn btn-danger"
+                <button class="btn btn-danger btn-danger-@Theme"
                         onclick=@(() => DeleteAsync(note.Id))>
                     Delete
                 </button>
@@ -33,19 +33,21 @@ else
     }
 }
 
-    @functions
+@functions
 {
-        List<Note> notes = new List<Note>();
+    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
 
-        protected override async Task OnInitAsync()
-        {
-            notes = await noteService.ReadAsync();
-        }
+    List<Note> notes = new List<Note>();
 
-        async Task DeleteAsync(int id)
-        {
-            await noteService.DeleteAsync(id);
-            notes = await noteService.ReadAsync();
-            base.StateHasChanged();
-        }
+    protected override async Task OnInitAsync()
+    {
+        notes = await noteService.ReadAsync();
     }
+
+    async Task DeleteAsync(int id)
+    {
+        await noteService.DeleteAsync(id);
+        notes = await noteService.ReadAsync();
+        base.StateHasChanged();
+    }
+}

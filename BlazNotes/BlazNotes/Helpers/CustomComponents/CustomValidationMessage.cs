@@ -44,12 +44,11 @@ namespace BlazNotes.Helpers.CustomComponents
                     $"an {nameof(EditForm)}.");
             }
 
-            if (For == null) // Not possible except if you manually specify T
+            if (For == null)
             {
                 throw new InvalidOperationException($"{GetType()} requires a value for the " +
                     $"{nameof(For)} parameter.");
             }
-
             else if (For != _previousFieldAccessor)
             {
                 _fieldIdentifier = FieldIdentifier.Create(For);

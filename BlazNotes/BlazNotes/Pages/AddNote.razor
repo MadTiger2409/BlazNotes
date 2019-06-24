@@ -3,30 +3,32 @@
 @inject INoteService noteService
 
 <h1>Add note</h1>
-<div class="card">
+<div class="card card-@Theme">
     <div class="card-body">
         <EditForm Model="@command" OnValidSubmit="@AddNoteAsync">
             <DataAnnotationsValidator />
 
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text"  class="form-control" placeholder="Input title here" bind="@command.Title" name="title"/>
-                <ValidationMessage For="@(() => command.Title)" />
+                <input type="text" class="form-control form-control-@Theme" placeholder="Input title here" bind="@command.Title" name="title"/>
+                <CustomValidationMessage For="@(() => command.Title)" Class="@("validation-message validation-message-" + Theme)" />
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea name="description" rows="5" class="form-control" placeholder="Input description here" bind="@command.Description"></textarea>
-                <ValidationMessage For="@(() => command.Description)" />
+                <textarea name="description" rows="5" class="form-control form-control-@Theme" placeholder="Input description here" bind="@command.Description"></textarea>
+                <CustomValidationMessage For="@(() => command.Description)" Class="@("validation-message validation-message-" + Theme)" />
             </div>
-            <button type="button" class="btn btn-secondary" onclick="@ResetFormAsync">Reset</button>
-            <button type="submit" class="btn btn-success">Add</button>
+            <button type="button" class="btn btn-secondary btn-secondary-@Theme" onclick="@ResetFormAsync">Reset</button>
+            <button type="submit" class="btn btn-success btn-success-@Theme">Add</button>
         </EditForm>
     </div>
 </div>
 
 @functions
 {
-    private CreateNoteCommand command = new CreateNoteCommand();
+    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
+
+    CreateNoteCommand command = new CreateNoteCommand();
 
     async Task AddNoteAsync()
     {

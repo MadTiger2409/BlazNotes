@@ -1,9 +1,9 @@
+using BlazNotes.Helpers;
 using BlazNotes.Services;
 using BlazNotes.Services.Interfaces;
 using Blazored.LocalStorage;
 using Blazored.Toast;
 using Blazored.Toast.Configuration;
-using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,7 +14,9 @@ namespace BlazNotes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<INoteService, NoteService>();
+            services.AddTransient<IThemeService, ThemeService>();
             services.AddTransient<ILocalStorageService, LocalStorageService>();
+            services.AddSingleton<AppState>();
 
             services.AddBlazoredToast(options =>
             {

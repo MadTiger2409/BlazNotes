@@ -1,17 +1,38 @@
 @inherits LayoutComponentBase
+@inject AppState appState
 
 <Blazored.Toast.BlazoredToasts />
 
-<div class="sidebar">
-    <NavMenu />
-</div>
-
-<div class="main scrollContainer">
-    <div class="top-row px-4" id="topBar">
-        
+<CascadingValue Value="@Theme" Name="Theme">
+    <div class="sidebar sidebar-@Theme">
+        <NavMenu />
     </div>
 
-    <div class="content px-4">
-        @Body
+    <div class="main scrollContainer scrollContainer-@Theme">
+        <div class="top-row top-row-@Theme px-4" id="topBar">
+
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
     </div>
-</div>
+</CascadingValue>
+
+
+@functions
+{
+    public string Theme { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+        Theme = await appState.GetThemeAsync();
+        appState.OnChange += UpdateThemeProperty;
+    }
+
+    async Task UpdateThemeProperty()
+    {
+        Theme = await appState.GetThemeAsync();
+        StateHasChanged();
+    }
+}

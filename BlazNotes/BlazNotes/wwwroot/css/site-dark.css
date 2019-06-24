@@ -159,7 +159,18 @@
     background-color: #494c4e;
     border: 1px solid rgba(144, 144, 144, 0.31)
 }
+    /*
+    * --- Focus ---
+    */
+    .form-control-dark:focus {
+        opacity: 1;
+        color: #b1bbc2;
+        background-color: #494c4e;
+    }
 
+    /*
+    * --- Placeholder ---
+    */
     .form-control-dark::-moz-placeholder {
         opacity: 1;
         color: #929597;

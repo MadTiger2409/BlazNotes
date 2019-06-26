@@ -1,10 +1,7 @@
 ﻿@page "/all"
+@inherits AllNotesComponent
 
 <link href="css/allNotes.css" rel="stylesheet" />
-
-@inject HttpClient Http
-@inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
-@inject INoteService noteService
 
 <h1>All notes</h1>
 
@@ -30,24 +27,5 @@ else
                 </button>
             </div>
         </div>
-    }
-}
-
-@functions
-{
-    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
-
-    List<Note> notes = new List<Note>();
-
-    protected override async Task OnInitAsync()
-    {
-        notes = await noteService.ReadAsync();
-    }
-
-    async Task DeleteAsync(int id)
-    {
-        await noteService.DeleteAsync(id);
-        notes = await noteService.ReadAsync();
-        base.StateHasChanged();
     }
 }

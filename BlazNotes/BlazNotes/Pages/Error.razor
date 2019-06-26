@@ -1,4 +1,5 @@
 ﻿@page "/error"
+@inherits BaseComponent
 
 <link href="css/error.css" rel="stylesheet" />
 
@@ -11,8 +12,3 @@
         </blockquote>
     </div>
 </div>
-
-@functions
-{
-    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
-}

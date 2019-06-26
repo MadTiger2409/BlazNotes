@@ -1,6 +1,5 @@
 ﻿@page "/edit/{Id:int}"
-@inject IToastService toastService
-@inject INoteService noteService
+@inherits EditNoteComponent
 
 <h1>Edit note</h1>
 <div class="card card-@Theme">
@@ -23,49 +22,3 @@
         </EditForm>
     </div>
 </div>
-
-@functions
-{
-    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
-    string title;
-    string description;
-    UpdateNoteCommand command;
-
-    protected override async Task OnInitAsync()
-    {
-        command = new UpdateNoteCommand(await noteService.ReadAsync(Id));
-
-        await SetRestoreVariables();
-    }
-
-    async Task UpdateNoteAsync()
-    {
-        try
-        {
-            await noteService.UpdateAsync(Id, command.Title, command.Description);
-            toastService.ShowSuccess("Note updated!", "Success");
-        }
-        catch (Exception)
-        {
-
-            toastService.ShowError("Something went wrong!", "Failed");
-        }
-    }
-
-    async Task SetRestoreVariables()
-    {
-        await Task.FromResult(title = command.Title);
-        await Task.FromResult(description = command.Description);
-    }
-
-    async Task RestoreContentAsync()
-    {
-        await Task.FromResult(command = new UpdateNoteCommand());
-        command.Title = title;
-        command.Description = description;
-    }
-}

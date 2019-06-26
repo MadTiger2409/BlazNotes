@@ -1,6 +1,5 @@
 ﻿@page "/add"
-@inject IToastService toastService
-@inject INoteService noteService
+@inherits AddNoteComponent
 
 <h1>Add note</h1>
 <div class="card card-@Theme">
@@ -23,33 +22,3 @@
         </EditForm>
     </div>
 </div>
-
-@functions
-{
-    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
-
-    CreateNoteCommand command = new CreateNoteCommand();
-
-    async Task AddNoteAsync()
-    {
-        try
-        {
-            await noteService.CreateAsync(command.Title, command.Description);
-            toastService.ShowSuccess("Note added!", "Success");
-        }
-        catch (Exception)
-        {
-            toastService.ShowError("Something went wrong!", "Failed");
-        }
-        finally
-        {
-            // title = "";
-            // description = "";
-        }
-    }
-
-    async Task ResetFormAsync()
-    {
-        await Task.FromResult(command = new CreateNoteCommand());
-    }
-}

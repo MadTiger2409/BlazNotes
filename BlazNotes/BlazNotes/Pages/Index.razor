@@ -1,12 +1,8 @@
 ﻿@page "/"
+@inherits BaseComponent
 
 <h1>Hi you!</h1>
 
 Welcome to BlazNotes - a simple web application builded with Blazor Framework.
 
 <SurveyPrompt Title="Do you like this app?" />
-
-@functions
-{
-    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
-}

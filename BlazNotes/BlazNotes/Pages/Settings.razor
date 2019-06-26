@@ -1,6 +1,5 @@
 ﻿@page "/settings"
-
-@inject AppState appState
+@inherits SettingsComponent
 
 <h1>Settings</h1>
 <div class="card card-@Theme">
@@ -9,29 +8,3 @@
         <button class="btn btn-primary btn-primary-@Theme" onclick="@ChangeClass">@Theme.UppercaseFirst()</button>
     </div>
 </div>
-
-@functions
-{
-    [CascadingParameter(Name = "Theme")] string Theme { get; set; }
-
-    bool isLight;
-
-    protected override void OnInit()
-    {
-        isLight = Theme.Equals("light");
-    }
-
-    async Task ChangeClass()
-    {
-        isLight = !isLight;
-
-        if (isLight == true)
-        {
-            await appState.SetThemeAsync("light");
-        }
-        else
-        {
-            await appState.SetThemeAsync("dark");
-        }
-    }
-}

@@ -5,6 +5,11 @@
 <div class="card card-@Theme">
     <div class="card-body">
         <b>Theme: </b>
-        <button class="btn btn-primary btn-primary-@Theme" onclick="@ChangeClass">@Theme.UppercaseFirst()</button>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches">
+            <label class="custom-control-label" for="customSwitches" onclick="@ChangeClass">@Theme</label>
+        </div>
+        @*<button class="btn btn-primary btn-primary-@Theme" onclick="@ChangeClass">@Theme.UppercaseFirst()</button>*@
     </div>
+    
 </div>

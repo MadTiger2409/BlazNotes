@@ -17,9 +17,17 @@ namespace BlazNotes.Components
 
         protected async Task DeleteAsync(int id)
         {
-            await noteService.DeleteAsync(id);
-            notes = await noteService.ReadAsync();
-            base.StateHasChanged();
+            try
+            {
+                await noteService.DeleteAsync(id);
+                notes = await noteService.ReadAsync();
+                base.StateHasChanged();
+                toastService.ShowSuccess("Note deleted!", "Success");
+            }
+            catch (Exception)
+            {
+                toastService.ShowError("Something went wrong!", "Failed");
+            }
         }
     }
 }

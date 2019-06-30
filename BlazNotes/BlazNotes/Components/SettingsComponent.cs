@@ -11,19 +11,18 @@ namespace BlazNotes.Components
     {
         [Inject]
         protected AppState appState { get; set; }
+        protected bool IsLight { get; set; }
 
-        protected bool isLight;
-
-        protected override void OnInit()
+        protected override async Task OnInitAsync()
         {
-            isLight = Theme.Equals("light");
+            await Task.FromResult(IsLight = Theme == "light");
         }
 
         protected async Task ChangeClass()
         {
-            isLight = !isLight;
+            IsLight = !IsLight;
 
-            if (isLight == true)
+            if (IsLight == true)
             {
                 await appState.SetThemeAsync("light");
             }
